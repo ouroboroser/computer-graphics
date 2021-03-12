@@ -49,11 +49,21 @@ class _PPM:
 
         new_arr = img_data.pixel_map
 
-        new_arr.reverse()
-
-        #print(new_arr)
-
+        new_chunks = []
+        new_order = []
+        count = 0
         for chunk in new_arr:
+            new_order.append(chunk)
+            count += 1
+            print(img_data.width, count)
+            if count == img_data.width:
+                new_order.reverse()
+                new_chunks += new_order
+                new_order = []
+                count = 0
+        new_chunks.reverse()
+        s = ''
+        for chunk in new_chunks:
             chunk = ' '.join([str(i) for i in chunk])
             s += chunk + '\n'
 
