@@ -8,7 +8,6 @@ class _PPM:
         with open(name, 'rb') as ppm_file:
             return [row for row in ppm_file.readlines()]
 
-
     def clean(self, input_img):
         output_img = []
         for row in input_img:
@@ -34,3 +33,37 @@ class _PPM:
         )
 
         return image_data
+
+    def write(self, img_data):
+        format = 'P3 \n'
+        size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
+
+        chunks = []
+        for row in img_data.pixel_map:
+            chunks += row
+
+        _max = max(chunks)
+        _max = str(_max) + '\n'
+
+        s = ''
+
+        new_arr = img_data.pixel_map
+
+        new_arr.reverse()
+
+        #print(new_arr)
+
+        for chunk in new_arr:
+            chunk = ' '.join([str(i) for i in chunk])
+            s += chunk + '\n'
+
+        for row in img_data.pixel_map:
+            print(row)
+
+        print('------------')
+        print(s)
+
+        file = format + size + _max + s
+
+        with open("converted.ppm", 'w+') as ppm_file:
+            ppm_file.write(file)
