@@ -38,6 +38,7 @@ class _PPM:
         format = 'P3 \n'
         size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
 
+
         chunks = []
         for row in img_data.pixel_map:
             chunks += row
@@ -50,18 +51,12 @@ class _PPM:
         new_arr = img_data.pixel_map
 
         new_arr.reverse()
-
-        #print(new_arr)
-
         for chunk in new_arr:
             chunk = ' '.join([str(i) for i in chunk])
             s += chunk + '\n'
 
         for row in img_data.pixel_map:
             print(row)
-
-        print('------------')
-        print(s)
 
         file = format + size + _max + s
 

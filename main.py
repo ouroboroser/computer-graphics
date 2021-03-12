@@ -13,7 +13,7 @@ image = _ppm_converter.data(_ppm_image)
 #print(image.height)
 #print(image.pixel_map)
 
-bmp_name = 'test-images/bmp/test2.bmp'
+bmp_name = 'test-images/bmp/test16.bmp'
 
 _bmp_converter = _BMP('test-bmp')
 _bmp_image = _bmp_converter.read(bmp_name)
