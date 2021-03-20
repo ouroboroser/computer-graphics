@@ -8,6 +8,7 @@ class _CONVERTER:
     def start(self):
         print('Input image path: ')
         img = input()
+        img_format = ''
         try:
             img_format = img.split('.')[-1]
         except:
