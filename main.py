@@ -1,4 +1,4 @@
-from converter.conveter import _CONVETER
+from converter.conveter import _CONVERTER
 
-converter = _CONVETER()
+converter = _CONVERTER()
 converter.start()
