@@ -1,4 +1,4 @@
-from convectors.image import _IMAGE
+from converters.image import _IMAGE
 
 class _PPM:
     def __init__(self, name):
@@ -34,10 +34,9 @@ class _PPM:
 
         return image_data
 
-    def write(self, img_data):
+    def write_from_bmp(self, img_data):
         format = 'P3 \n'
         size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
-
 
         chunks = []
         for row in img_data.pixel_map:
@@ -53,11 +52,9 @@ class _PPM:
         new_chunks = []
         new_order = []
         count = 0
-
         for chunk in new_arr:
             new_order.append(chunk)
             count += 1
-            print(img_data.width, count)
             if count == img_data.width:
                 new_order.reverse()
                 new_chunks += new_order
@@ -69,10 +66,17 @@ class _PPM:
             chunk = ' '.join([str(i) for i in chunk])
             s += chunk + '\n'
 
-        for row in img_data.pixel_map:
-            print(row)
-
         file = format + size + _max + s
 
-        with open("converted.ppm", 'w+') as ppm_file:
+        with open("from_bmp_to_ppm.ppm", 'w+') as ppm_file:
+            ppm_file.write(file)
+
+    def write_from_png(self, img_data):
+        format = 'P3 \n'
+        size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
+        _max = max(img_data.pixel_map)
+        _max = str(_max)
+        s = ' '.join([str(i) for i in img_data.pixel_map])
+        file = format + size + _max + ' ' + s
+        with open("from_png_to_ppm.ppm", 'w+') as ppm_file:
             ppm_file.write(file)

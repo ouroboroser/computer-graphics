@@ -1,29 +1,30 @@
-from convectors.ppm import _PPM
-from convectors.bmp import _BMP
-
-ppm_name = 'test-images/test.ppm'
+from converters.ppm import _PPM
+from converters.bmp import _BMP
+from converters.png import _PNG
 
 _ppm_converter = _PPM('test-ppm')
-_ppm_image = _ppm_converter.read(ppm_name)
-_ppm_image = _ppm_converter.clean(_ppm_image)
+# bmp_name = 'test-images/bmp/test5.bmp'
+print('Input .bmp file name')
+bmp_name = input()
 
-image = _ppm_converter.data(_ppm_image)
+try:
+    _bmp_converter = _BMP('test-bmp')
+    _bmp_image = _bmp_converter.read(bmp_name)
+    _to_P3 = _ppm_converter.write_from_bmp(_bmp_image)
+except FileNotFoundError:
+    print("Couldn't find the .bmp file specified. Invalid input data.")
+except:
+    print("Invalid file format")
 
-#print(image.width)
-#print(image.height)
-#print(image.pixel_map)
+# png_name = 'test-images/png/test1.png'
+print('Input .png file name')
+png_name = input()
 
-bmp_name = 'test-images/bmp/test16.bmp'
-
-_bmp_converter = _BMP('test-bmp')
-_bmp_image = _bmp_converter.read(bmp_name)
-
-#print(_bmp_image.width)
-#print(_bmp_image.height)
-
-#print(_bmp_image.pixel_map)
-
-#for row in _bmp_image.pixel_map:
-#    print(row)
-
-_to_P3 = _ppm_converter.write(_bmp_image)
+try:
+    _png_converter = _PNG('test-png')
+    _png_image = _png_converter.read(png_name)
+    _to_P3 = _ppm_converter.write_from_png(_png_image)
+except FileNotFoundError:
+    print("Couldn't find the .png file specified. Invalid input data.")
+except:
+    print("Invalid file format")

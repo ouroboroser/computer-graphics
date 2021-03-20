@@ -1,6 +1,5 @@
 from struct import unpack
-from convectors.image import _IMAGE
-from convectors.helpers.bmp_cursor import cursor
+from converters.image import _IMAGE
 
 class _BMP:
     def __init__(self, name):
