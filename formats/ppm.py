@@ -1,5 +1,6 @@
 from formats.image import _IMAGE
 
+
 class _PPM:
     def read(self, name):
         with open(name, 'rb') as ppm_file:
@@ -12,7 +13,7 @@ class _PPM:
         for row in output_img:
             if ('#' in row) == True:
                 output_img.remove(row)
-        return  output_img
+        return output_img
 
     def data(self, input_img):
         new_format = ' '.join(input_img)
@@ -31,7 +32,7 @@ class _PPM:
 
         return image_data
 
-    def write_from_bmp(self, img_data):
+    def write_from_bmp(self, img_data, result_directory):
         format = 'P3 \n'
         size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
 
@@ -63,15 +64,18 @@ class _PPM:
 
         file = format + size + _max + s
 
-        with open("./results/from_bmp_to_ppm.ppm", 'w+') as ppm_file:
+        result_directory = str(result_directory)
+        with open(result_directory, 'w+') as ppm_file:
             ppm_file.write(file)
 
-    def write_from_png(self, img_data):
+    def write_from_png(self, img_data, result_directory):
         format = 'P3 \n'
         size = str(img_data.width) + ' ' + str(img_data.height) + '\n'
         _max = max(img_data.pixel_map)
         _max = str(_max)
         s = ' '.join([str(i) for i in img_data.pixel_map])
         file = format + size + _max + ' ' + s
-        with open("./results/from_png_to_ppm.ppm", 'w+') as ppm_file:
+
+        result_directory = str(result_directory)
+        with open(result_directory, 'w+') as ppm_file:
             ppm_file.write(file)
